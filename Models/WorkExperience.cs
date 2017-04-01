@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,5 +21,9 @@ namespace ProjectResume.Models
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime EmploymentEndDate { get; set; }
+
+        public int? PersonID { get; set; }
+        [ForeignKey("PersonID")]
+        public Person person { get; set; }
     }
 }

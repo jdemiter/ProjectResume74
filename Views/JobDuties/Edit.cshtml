@@ -1,0 +1,43 @@
+@model ProjectResume.Models.JobDuty
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>JobDuty</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ID" />
+        <div class="form-group">
+            <label asp-for="Responsibilities" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Responsibilities" class="form-control" />
+                <span asp-validation-for="Responsibilities" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="WorkExperienceID" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="WorkExperienceID" class="form-control" asp-items="ViewBag.WorkExperienceID"></select>
+                <span asp-validation-for="WorkExperienceID" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

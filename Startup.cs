@@ -95,6 +95,7 @@ namespace ProjectResume
 
             WorkSeedData.Initialize(app.ApplicationServices);
            EducationSeedData.Initialize(app.ApplicationServices);
+            //PersonSeedData.Initialize(app.ApplicationServices);
         }
     }
 }

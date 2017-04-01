@@ -31,5 +31,9 @@ namespace ProjectResume.Data
         public DbSet<References> References { get; set; }
 
         public DbSet<VolunteerExperience> VolunteerExperience { get; set; }
+
+        public DbSet<JobDuty> JobDuty { get; set; }
+
+        public DbSet<Person> Person { get; set; }
     }
 }

@@ -12,9 +12,15 @@ namespace ProjectResume.Models
         public int ID { get; set; }
 
         //JobDuty properties
+        public string Responsibilities { get; set; }
 
-        public int WorkExperienceID { get; set; }
-        [ForeignKey("WorkExperienceId")]
-        public WorkExperience Job { get; set; }
+        public int? WorkExperienceID { get; set; }
+        
+        
+        public WorkExperience Employer { get; set; }
+
+        public int? PersonID { get; set; }
+        [ForeignKey("PersonID")]
+        public Person person { get; set; }
     }
 }

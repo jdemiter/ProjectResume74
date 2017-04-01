@@ -93,7 +93,8 @@ namespace ProjectResume
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            
+            WorkSeedData.Initialize(app.ApplicationServices);
+           EducationSeedData.Initialize(app.ApplicationServices);
         }
     }
 }

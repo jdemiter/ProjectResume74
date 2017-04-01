@@ -172,26 +172,12 @@ namespace ProjectResume.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ProjectResume.Models.Certifications", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CertificationReceived");
-
-                    b.Property<DateTime>("DateReceived");
-
-                    b.Property<string>("From");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Certifications");
-                });
-
             modelBuilder.Entity("ProjectResume.Models.Education", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Concentration");
 
                     b.Property<DateTime>("DateCompleted");
 

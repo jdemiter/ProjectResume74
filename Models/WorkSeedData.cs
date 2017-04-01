@@ -30,6 +30,7 @@ namespace ProjectResume.Models
                         EmploymentEndDate = DateTime.Parse("2017-4-1")
 
                     }
+
                     );
                 context.SaveChanges();
 

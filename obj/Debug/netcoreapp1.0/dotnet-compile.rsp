@@ -268,6 +268,10 @@ C:\Users\jdemiter\Source\Repos\ProjectResume74\Data\Migrations\20170401163739_ed
 C:\Users\jdemiter\Source\Repos\ProjectResume74\Data\Migrations\20170401163739_educationseeddata.Designer.cs
 C:\Users\jdemiter\Source\Repos\ProjectResume74\Data\Migrations\20170401203804_personandpersonseeddata.cs
 C:\Users\jdemiter\Source\Repos\ProjectResume74\Data\Migrations\20170401203804_personandpersonseeddata.Designer.cs
+C:\Users\jdemiter\Source\Repos\ProjectResume74\Data\Migrations\20170405013435_personID.cs
+C:\Users\jdemiter\Source\Repos\ProjectResume74\Data\Migrations\20170405013435_personID.Designer.cs
+C:\Users\jdemiter\Source\Repos\ProjectResume74\Data\Migrations\20170405025051_morepeopleseed.cs
+C:\Users\jdemiter\Source\Repos\ProjectResume74\Data\Migrations\20170405025051_morepeopleseed.Designer.cs
 C:\Users\jdemiter\Source\Repos\ProjectResume74\Data\Migrations\ApplicationDbContextModelSnapshot.cs
 C:\Users\jdemiter\Source\Repos\ProjectResume74\Models\ApplicationUser.cs
 C:\Users\jdemiter\Source\Repos\ProjectResume74\Models\Education.cs

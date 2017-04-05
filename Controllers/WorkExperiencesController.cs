@@ -22,7 +22,10 @@ namespace ProjectResume.Controllers
         // GET: WorkExperiences
         public async Task<IActionResult> Index()
         {
-            return View(await _context.WorkExperience.ToListAsync());
+            var workexperience = _context.WorkExperience
+                .Include(p => p.person)
+                .AsNoTracking();
+            return View(await workexperience.ToListAsync());
         }
 
         // GET: WorkExperiences/Details/5
@@ -33,7 +36,10 @@ namespace ProjectResume.Controllers
                 return NotFound();
             }
 
-            var workExperience = await _context.WorkExperience.SingleOrDefaultAsync(m => m.ID == id);
+            var workExperience = await _context.WorkExperience
+                .Include(p =>p.person)
+                .AsNoTracking()
+                .SingleOrDefaultAsync (p => p.PersonID == id);
             if (workExperience == null)
             {
                 return NotFound();
@@ -45,10 +51,12 @@ namespace ProjectResume.Controllers
         // GET: WorkExperiences/Create
         public IActionResult Create()
         {
+            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "Last Name");
             return View();
+
         }
 
-        // POST: WorkExperiences/Create
+         // POST: WorkExperiences/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -77,6 +85,8 @@ namespace ProjectResume.Controllers
             {
                 return NotFound();
             }
+            ViewData["ID"] = new SelectList(_context.Person, "ID", "Last Name");
+            
             return View(workExperience);
         }
 
@@ -85,35 +95,37 @@ namespace ProjectResume.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Employer,Location, JobTitle,EmploymentStartDate,EmploymentEndDate")] WorkExperience workExperience)
+        public async Task<IActionResult> EditPost(int? id)
         {
-            if (id != workExperience.ID)
+            if (id == null)
             {
                 return NotFound();
             }
+            var workexperienceToUpdate = await _context.WorkExperience
+                .SingleOrDefaultAsync(w => w.PersonID == id);
 
-            if (ModelState.IsValid)
+            if (await TryUpdateModelAsync<WorkExperience>(workexperienceToUpdate,
+                "",
+                c => c.Employer, c => c.person))
             {
                 try
                 {
-                    _context.Update(workExperience);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException /* ex */)
                 {
-                    if (!WorkExperienceExists(workExperience.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes." +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
                 }
                 return RedirectToAction("Index");
             }
-            return View(workExperience);
+            ViewData["ID"] = new SelectList(_context.Person, "ID", "Last Name");
+            return View();
         }
+                   
+           
 
         // GET: WorkExperiences/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -123,7 +135,10 @@ namespace ProjectResume.Controllers
                 return NotFound();
             }
 
-            var workExperience = await _context.WorkExperience.SingleOrDefaultAsync(m => m.ID == id);
+            var workExperience = await _context.WorkExperience
+                .Include(c => c.person)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.PersonID == id);
             if (workExperience == null)
             {
                 return NotFound();
@@ -137,7 +152,7 @@ namespace ProjectResume.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var workExperience = await _context.WorkExperience.SingleOrDefaultAsync(m => m.ID == id);
+            var workExperience = await _context.WorkExperience.SingleOrDefaultAsync(m => m.PersonID == id);
             _context.WorkExperience.Remove(workExperience);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -147,5 +162,6 @@ namespace ProjectResume.Controllers
         {
             return _context.WorkExperience.Any(e => e.ID == id);
         }
+       
     }
 }

@@ -11,6 +11,8 @@
         <h4>WorkExperience</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+
         <div class="form-group">
             <label asp-for="Employer" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -51,6 +53,8 @@
                 </div>
             </div>
         </div>
+   </div>
+        
 </form>
 
 <div>
@@ -59,4 +63,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+  
 }

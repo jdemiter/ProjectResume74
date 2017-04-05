@@ -8,9 +8,10 @@ using ProjectResume.Data;
 namespace ProjectResume.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170405013435_personID")]
+    partial class personID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -278,8 +279,7 @@ namespace ProjectResume.Data.Migrations
 
             modelBuilder.Entity("ProjectResume.Models.WorkExperience", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("ID");
 
                     b.Property<string>("Employer");
 
@@ -295,7 +295,7 @@ namespace ProjectResume.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("PersonID");
+                    b.HasIndex("ID");
 
                     b.ToTable("WorkExperience");
                 });
@@ -352,7 +352,8 @@ namespace ProjectResume.Data.Migrations
                 {
                     b.HasOne("ProjectResume.Models.Person", "person")
                         .WithMany()
-                        .HasForeignKey("PersonID");
+                        .HasForeignKey("ID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

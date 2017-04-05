@@ -33,7 +33,7 @@ namespace ProjectResume.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person.SingleOrDefaultAsync(m => m.ID == id);
+            var person = await _context.Person.SingleOrDefaultAsync(m => m.PersonID == id);
             if (person == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace ProjectResume.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,City,Email,FirstName,LastName,PhoneNumber,State,StreetAddress,Zip")] Person person)
+        public async Task<IActionResult> Create([Bind("PersonID,City,Email,FirstName,LastName,PhoneNumber,State,StreetAddress,Zip")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace ProjectResume.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person.SingleOrDefaultAsync(m => m.ID == id);
+            var person = await _context.Person.SingleOrDefaultAsync(m => m.PersonID == id);
             if (person == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace ProjectResume.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,City,Email,FirstName,LastName,PhoneNumber,State,StreetAddress,Zip")] Person person)
+        public async Task<IActionResult> Edit(int id, [Bind("PersonID,City,Email,FirstName,LastName,PhoneNumber,State,StreetAddress,Zip")] Person person)
         {
-            if (id != person.ID)
+            if (id != person.PersonID)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace ProjectResume.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonExists(person.ID))
+                    if (!PersonExists(person.PersonID))
                     {
                         return NotFound();
                     }
@@ -123,7 +123,7 @@ namespace ProjectResume.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person.SingleOrDefaultAsync(m => m.ID == id);
+            var person = await _context.Person.SingleOrDefaultAsync(m => m.PersonID == id);
             if (person == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace ProjectResume.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var person = await _context.Person.SingleOrDefaultAsync(m => m.ID == id);
+            var person = await _context.Person.SingleOrDefaultAsync(m => m.PersonID == id);
             _context.Person.Remove(person);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -145,7 +145,7 @@ namespace ProjectResume.Controllers
 
         private bool PersonExists(int id)
         {
-            return _context.Person.Any(e => e.ID == id);
+            return _context.Person.Any(e => e.PersonID == id);
         }
     }
 }
